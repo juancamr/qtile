@@ -1,4 +1,4 @@
-import const, subprocess, keymap, layout, topbar, screens, set
+import keymap, layout, topbar, screens, set, functions
 from libqtile import hook, qtile
 
 # navigate keys
@@ -27,35 +27,8 @@ screens = screens.init_screens()
     wmname,
 ) = set.get_settings()
 
-
-@hook.subscribe.client_new
-def new_client(window):
-    if window.name == "ArchLinux Logout":
-        qtile.hide_show_bar()
-
-
-# shows the top bar when the archlinux-logout widget is closed
-@hook.subscribe.client_killed
-def logout_killed(window):
-    if window.name == "ArchLinux Logout":
-        qtile.hide_show_bar()
-
-
-@hook.subscribe.startup_once
-def start_once():
-    subprocess.call([const.HOME + const.AUTOSTART_SCRIPT])
-
-
-@hook.subscribe.startup
-def start_always():
-    # Set the cursor to something sane in X
-    subprocess.Popen(["xsetroot", "-cursor_name", "left_ptr"])
-
-
-@hook.subscribe.client_new
-def set_floating(window):
-    if (
-        window.window.get_wm_transient_for()
-        or window.window.get_wm_type() in floating_types
-    ):
-        window.floating = True
+new_client = functions.new_client
+logout_killed = functions.logout_killed
+start_once = functions.start_once
+start_always = functions.start_always
+set_floating = functions.set_floating
