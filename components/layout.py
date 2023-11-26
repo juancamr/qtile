@@ -1,6 +1,9 @@
 from libqtile.config import Group
 from libqtile import layout
-import keymap
+from utils.colors import Colors
+import settings.keymap as keymap
+
+colors = Colors()
 
 
 def init_groups():
@@ -26,8 +29,9 @@ def init_layouts():
         return {
             "margin": 10,
             "border_width": 2,
-            "border_focus": "#6F00FF",
-            "border_normal": "#32127A",
+            "border_focus": colors.BLUE_500,
+            "border_normal": colors.BLUE_950,
+            "radius": 10,
         }
 
     layout_theme = init_layout_theme()

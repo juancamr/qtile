@@ -267,5 +267,6 @@ class Colors:
     ROSE_900: Literal["#881337"] = "#881337"
     ROSE_950: Literal["#4c0519"] = "#4c0519"
 
-    def duplicate_colors(self, color: str) -> str:
+    @staticmethod
+    def double(color: str) -> list:
         return [color, color]

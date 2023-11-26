@@ -1,5 +1,5 @@
-import keymap, layout, topbar, screens, set, functions
-from libqtile import hook, qtile
+from settings import keymap, set, functions as fn
+from components import layout, topbar, screens
 
 # navigate keys
 keys = keymap.init_navigate_keys()
@@ -27,8 +27,19 @@ screens = screens.init_screens()
     wmname,
 ) = set.get_settings()
 
-new_client = functions.new_client
-logout_killed = functions.logout_killed
-start_once = functions.start_once
-start_always = functions.start_always
-set_floating = functions.set_floating
+# fn
+new_client = fn.new_client
+logout_killed = fn.logout_killed
+start_once = fn.start_once
+start_always = fn.start_always
+set_floating = fn.set_floating
+
+border_args = dict(
+    border_normal="#000000",
+    border_focus="#535d6c",
+    border_width=2,
+    margin=0,
+    single_border_width=0,
+    single_margin=0,
+    radius=10,  # Ajusta este valor para cambiar la cantidad de redond
+)

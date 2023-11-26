@@ -1,5 +1,5 @@
 from libqtile.config import Screen
-from topbar import init_widgets
+from components.topbar import init_widgets
 from libqtile import bar
 
 widgets_list = init_widgets()[1]

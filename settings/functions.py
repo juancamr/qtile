@@ -1,5 +1,6 @@
 from libqtile import hook, qtile
-import const, subprocess
+from utils import constants as const
+import subprocess
 
 
 @hook.subscribe.client_new

@@ -1,24 +1,26 @@
 from libqtile.config import Key
 from libqtile.command import lazy
-from utils import run_script
-from const import MOD, ALT, SHIFT, CONTROL
-import const
+from utils.constants import MOD, ALT, SHIFT, CONTROL
+from utils import constants as const
+from utils.utils import run_script
 
 workspaces_keybindings = ["g", "c", "r", "s"]
 
 
-def init_custom_keys():
+
+def init_custom_keys() -> list:
     return [
         Key([MOD], "Return", lazy.spawn(const.TERMINAL)),
         Key([MOD], "x", lazy.spawn(const.LOGOUT_COMMAND)),
         Key([MOD], "d", lazy.spawn(const.DMENU)),
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
-        Key([MOD], "e", lazy.function(lambda qtile: run_script(qtile, const.PYHASHER))),
         Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
+        Key([MOD], "e", lazy.function(lambda q: run_script(const.PYHASHER))),
+        Key([MOD, ALT], "s", lazy.function(lambda q: run_script(const.SETTINGS))),
     ]
 
 
-def init_navigate_keys():
+def init_navigate_keys() -> list:
     return [
         Key([MOD], "f", lazy.window.toggle_fullscreen()),
         Key([MOD], "q", lazy.window.kill()),
@@ -111,7 +113,7 @@ def init_navigate_keys():
     ]
 
 
-def add_workespaces_keys(groups, keys):
+def add_workespaces_keys(groups, keys) -> list:
     keys = []
     for i in groups:
         keys.extend(
