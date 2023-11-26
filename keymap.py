@@ -1,19 +1,16 @@
 from libqtile.config import Key
 from libqtile.command import lazy
-import subprocess
-import os
+from utils import run_script
 
 mod = "mod4"
 alt = "mod1"
 my_terminal = "alacritty"
-dmenu_command = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
 workspaces_keybindings = ["g", "c", "r", "s"]
 browser = "firefox"
 
-
-def open_pyhasher(qtile):
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/pyhasher/pyhasher.sh"])
+# custom commands
+dmenu_command = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
+pyhasher_command = "/.config/qtile/scripts/pyhasher.sh"
 
 
 def init_custom_keys():
@@ -22,7 +19,9 @@ def init_custom_keys():
         Key([mod], "Return", lazy.spawn(my_terminal)),
         Key([mod], "d", lazy.spawn(dmenu_command)),
         Key([mod], "b", lazy.spawn(browser)),
-        Key([mod], "e", lazy.function(open_pyhasher)),
+        Key(
+            [mod], "e", lazy.function(lambda qtile: run_script(qtile, pyhasher_command))
+        ),
     ]
 
 
