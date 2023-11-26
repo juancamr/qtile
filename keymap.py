@@ -1,5 +1,7 @@
 from libqtile.config import Key
 from libqtile.command import lazy
+import subprocess
+import os
 
 mod = "mod4"
 alt = "mod1"
@@ -9,12 +11,18 @@ workspaces_keybindings = ["g", "c", "r", "s"]
 browser = "firefox"
 
 
+def open_pyhasher(qtile):
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/pyhasher/pyhasher.sh"])
+
+
 def init_custom_keys():
     return [
         Key([mod], "x", lazy.spawn("archlinux-logout")),
         Key([mod], "Return", lazy.spawn(my_terminal)),
         Key([mod], "d", lazy.spawn(dmenu_command)),
         Key([mod], "b", lazy.spawn(browser)),
+        Key([mod], "e", lazy.function(open_pyhasher)),
     ]
 
 
@@ -109,13 +117,6 @@ def init_navigate_keys():
         Key([mod, "shift"], "Right", lazy.layout.swap_right()),
         Key([mod, "shift"], "space", lazy.window.toggle_floating()),
     ]
-
-
-def init_keys():
-    keys = init_navigate_keys()
-    keys.extend(init_custom_keys())
-
-    return keys
 
 
 def add_workespaces_keys(groups, keys):

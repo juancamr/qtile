@@ -13,11 +13,19 @@ mod2 = "control"
 home = os.path.expanduser("~")
 my_terminal = "alacritty"
 
-keys = keymap.init_keys()
+# navigate keys
+keys = keymap.init_navigate_keys()
+
+# workspaces keys
 groups = layout.init_groups()
 keys.extend(keymap.add_workespaces_keys(groups, keys))
+
+# custom keys
+keys.extend(keymap.init_custom_keys())
+
 layouts = layout.init_layouts()
 widget_defaults, widgets_list = topbar.init_widgets()
+
 screens = screens.init_screens()
 
 

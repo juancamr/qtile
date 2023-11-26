@@ -5,7 +5,7 @@ function run {
 	fi
 }
 
-run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
+#run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 run nm-applet &
 run pamac-tray &
 run xfce4-power-manager &
