@@ -267,6 +267,45 @@ class Colors:
     ROSE_900: Literal["#881337"] = "#881337"
     ROSE_950: Literal["#4c0519"] = "#4c0519"
 
-    @staticmethod
-    def double(color: str) -> list:
-        return [color, color]
+
+def double(color: str) -> list:
+    return [color, color]
+
+
+colors = Colors()
+
+
+indigo_combination = [
+    double(colors.CYAN_600),
+    double(colors.SKY_600),
+    double(colors.BLUE_600),
+    double(colors.INDIGO_600),
+]
+
+violet_combination = [
+    double(colors.SKY_500),
+    double(colors.BLUE_500),
+    double(colors.INDIGO_500),
+    double(colors.VIOLET_500),
+]
+
+sky_combination = [
+    double(colors.YELLOW_500),
+    double(colors.GREEN_500),
+    double(colors.TEAL_500),
+    double(colors.SKY_500),
+]
+
+red_combination = [
+    double(colors.YELLOW_500),
+    double(colors.AMBER_500),
+    double(colors.ORANGE_500),
+    double(colors.RED_500),
+]
+
+purple_combination = [
+    double(colors.BLUE_600),
+    double(colors.INDIGO_600),
+    double(colors.VIOLET_600),
+    double(colors.PURPLE_600),
+]

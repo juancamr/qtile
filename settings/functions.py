@@ -1,5 +1,6 @@
-from libqtile import hook, qtile
-from utils import constants as const
+from libqtile import hook, qtile, layout
+from utils import constants as const, utils
+from libqtile.log_utils import logger
 import subprocess
 
 
@@ -9,6 +10,17 @@ def new_client(window):
         qtile.hide_show_bar()
 
 
+# @hook.subscribe.client_new
+# def toggle_borders(window):
+#     group = window.qtile.current_group
+#     if len(group.windows) == 0:
+#         # use bsp layout
+#         window.qtile.current_group.use_layout(3)
+#     else:
+#         # use monadtall layout
+#         window.qtile.current_group.use_layout(0)
+
+
 # shows the top bar when the archlinux-logout widget is closed
 @hook.subscribe.client_killed
 def logout_killed(window):
@@ -16,8 +28,14 @@ def logout_killed(window):
         qtile.hide_show_bar()
 
 
+@hook.subscribe.client_killed
+def focus_last(window):
+    window.qtile.current_group.windows[-1].focus()
+
+
 @hook.subscribe.startup_once
 def start_once():
+    utils.random_wallpaper()
     subprocess.call([const.HOME + const.AUTOSTART_SCRIPT])
 
 

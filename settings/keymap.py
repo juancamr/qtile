@@ -3,9 +3,10 @@ from libqtile.command import lazy
 from utils.constants import MOD, ALT, SHIFT, CONTROL
 from utils import constants as const
 from utils.utils import run_script
+from settings import functions
+import os
 
-workspaces_keybindings = ["g", "c", "r", "s"]
-
+workspaces_keybindings = ["g", "c", "r", "t", "n", "s"]
 
 
 def init_custom_keys() -> list:
@@ -15,8 +16,10 @@ def init_custom_keys() -> list:
         Key([MOD], "d", lazy.spawn(const.DMENU)),
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
         Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
-        Key([MOD], "e", lazy.function(lambda q: run_script(const.PYHASHER))),
-        Key([MOD, ALT], "s", lazy.function(lambda q: run_script(const.SETTINGS))),
+        Key([MOD], "m", lazy.window.toggle_floating()),
+        Key([MOD], "p", lazy.spawn("shutter -s")),
+        Key([MOD, ALT], "s", lazy.function(lambda _: os.system(const.OPEN_SETTINGS))),
+        Key([MOD], "e", lazy.function(lambda _: os.system(const.PYHASHER))),
     ]
 
 
@@ -26,8 +29,6 @@ def init_navigate_keys() -> list:
         Key([MOD], "q", lazy.window.kill()),
         Key([MOD, SHIFT], "q", lazy.window.kill()),
         Key([MOD, SHIFT], "i", lazy.restart()),
-        Key([MOD], "n", lazy.layout.normalize()),
-        Key([MOD], "space", lazy.next_layout()),
         Key([MOD], "Up", lazy.layout.up()),
         Key([MOD], "Down", lazy.layout.down()),
         Key([MOD], "Left", lazy.layout.left()),
@@ -119,6 +120,7 @@ def add_workespaces_keys(groups, keys) -> list:
         keys.extend(
             [
                 Key([MOD], i.name, lazy.group[i.name].toscreen()),
+                Key([MOD, CONTROL], i.name, lazy.window.togroup(i.name)),
                 Key(
                     [MOD, SHIFT],
                     i.name,

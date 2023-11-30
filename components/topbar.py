@@ -1,19 +1,27 @@
 from libqtile import qtile, widget
-from utils.colors import Colors
-from utils import constants as const
-
-colors = Colors()
+from utils.colors import colors, double, purple_combination
+from utils import constants as const, utils
 
 
 def init_widgets():
-    black = colors.double(colors.GRAY_900)
+    black = double(colors.GRAY_900)
 
     def init_widgets_defaults():
-        return dict(font=const.NOTO_SANS_FONT, fontsize=12, padding=2, background=black)
+        return dict(
+            font=const.PRODUCT_SANS_FONT, fontsize=12, padding=2, background=black
+        )
 
     widget_defaults = init_widgets_defaults()
-    white = colors.double(colors.ZINC_050)
+    white = double(colors.ZINC_050)
     panel_background = ["#292d3e", "#292d3e"]
+
+    (
+        ram_background,
+        volume_background,
+        layout_background,
+        date_background,
+    ) = purple_combination
+
     python_icon = "~/.config/qtile/assets/icons/python.png"
 
     def init_widgets_list():
@@ -28,7 +36,8 @@ def init_widgets():
                 filename=python_icon,
                 margin=1,
                 background=panel_background,
-                mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(const.TERMINAL)},
+                # mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(const.TERMINAL)},
+                mouse_callbacks={"Button1": utils.random_wallpaper},
             ),
             widget.Sep(
                 linewidth=0,
@@ -36,7 +45,7 @@ def init_widgets():
                 background=panel_background,
             ),
             widget.GroupBox(
-                font=const.NOTO_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_BOLD_FONT,
                 fontsize=12,
                 margin_y=2,
                 margin_x=0,
@@ -44,12 +53,12 @@ def init_widgets():
                 padding_x=3,
                 borderwidth=3,
                 active=white,
-                inactive=colors.double(colors.GRAY_600),
+                inactive=double(colors.GRAY_600),
                 rounded=False,
-                highlight_method="block",
+                highlight_method="block",  # block
                 urgent_alert_method="block",
-                this_current_screen_border=colors.double(colors.BLUE_500),
-                this_screen_border=black,
+                this_current_screen_border=double(colors.BLUE_600),
+                this_screen_border=panel_background,
                 other_current_screen_border=panel_background,
                 other_screen_border=panel_background,
                 foreground=white,
@@ -62,8 +71,10 @@ def init_widgets():
                 background=panel_background,
             ),
             widget.WindowName(
-                foreground=colors.double(colors.INDIGO_300),
+                foreground=double(colors.YELLOW_500),
+                font=const.PRODUCT_SANS_BOLD_FONT,
                 background=panel_background,
+                fontsize=13,
                 padding=0,
             ),
             widget.Systray(background=panel_background, padding=5),
@@ -72,7 +83,7 @@ def init_widgets():
                 text=const.CORNER_ICON,
                 font=const.FONT_AWESOME,
                 background=panel_background,
-                foreground=colors.double(colors.YELLOW_500),
+                foreground=ram_background,
                 padding=0,
                 fontsize=48.9,
             ),
@@ -80,14 +91,14 @@ def init_widgets():
                 text=const.MEMORY_ICON,
                 font=const.FONT_AWESOME,
                 foreground=black,
-                background=colors.double(colors.YELLOW_500),
+                background=ram_background,
                 padding=0,
                 fontsize=14,
             ),
             widget.Memory(
                 foreground=black,
-                background=colors.double(colors.YELLOW_500),
-                font=const.NOTO_SANS_BOLD_FONT,
+                background=ram_background,
+                font=const.PRODUCT_SANS_BOLD_FONT,
                 mouse_callbacks={
                     "Button1": lambda: qtile.cmd_spawn(const.TERMINAL + " -e htop")
                 },
@@ -97,8 +108,8 @@ def init_widgets():
             widget.TextBox(
                 text=const.CORNER_ICON,
                 font=const.FONT_AWESOME,
-                background=colors.double(colors.YELLOW_500),
-                foreground=colors.double(colors.ORANGE_500),
+                background=ram_background,
+                foreground=volume_background,
                 padding=0,
                 fontsize=48.9,
             ),
@@ -107,29 +118,33 @@ def init_widgets():
                 fontsize=23,
                 font=const.FONT_AWESOME,
                 foreground=black,
-                background=colors.double(colors.ORANGE_500),
+                background=volume_background,
                 padding=0,
-                mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(const.PAVUCONTROL)},
+                mouse_callbacks={
+                    "Button1": lambda: qtile.cmd_spawn(
+                        f"{const.HOME}{const.CHANGE_OUTPUT}"
+                    )
+                },
             ),
             widget.Volume(
-                font=const.NOTO_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_BOLD_FONT,
                 foreground=black,
-                background=colors.double(colors.ORANGE_500),
+                background=volume_background,
                 padding=5,
                 fontsize=13,
             ),
             widget.TextBox(
                 text=const.CORNER_ICON,
                 font=const.FONT_AWESOME,
-                background=colors.double(colors.ORANGE_500),
-                foreground=colors.double(colors.RED_500),
+                background=volume_background,
+                foreground=layout_background,
                 padding=0,
                 fontsize=48.9,
             ),
             widget.CurrentLayoutIcon(
                 custom_icon_paths=const.ICONS_PATH,
                 foreground=black,
-                background=colors.double(colors.RED_500),
+                background=layout_background,
                 padding=0,
                 scale=0.7,
             ),
@@ -137,35 +152,35 @@ def init_widgets():
                 linewidth=0,
                 padding=5,
                 foreground=black,
-                background=colors.double(colors.RED_500),
+                background=layout_background,
             ),
             widget.CurrentLayout(
                 foreground=black,
                 fontsize=13,
-                background=colors.double(colors.RED_500),
+                background=layout_background,
                 padding=5,
-                font=const.NOTO_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_BOLD_FONT,
             ),
             widget.TextBox(
                 text=const.CORNER_ICON,
                 font=const.FONT_AWESOME,
-                background=colors.double(colors.RED_500),
-                foreground=colors.double(colors.BLUE_300),
+                background=layout_background,
+                foreground=date_background,
                 padding=0,
                 fontsize=48.9,
             ),
             widget.Clock(
                 foreground=black,
-                background=colors.double(colors.BLUE_300),
-                font=const.NOTO_SANS_BOLD_FONT,
+                background=date_background,
+                font=const.PRODUCT_SANS_BOLD_FONT,
                 fontsize=13,
-                format="%B %d  [ %H:%M ]",
+                format="%B %d - %H:%M",
             ),
             widget.Sep(
                 linewidth=0,
                 padding=10,
                 foreground=black,
-                background=colors.double(colors.BLUE_300),
+                background=date_background,
             ),
         ]
 
