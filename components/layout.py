@@ -1,19 +1,19 @@
-from libqtile.config import Match
-from libqtile.config import Group
 from libqtile import layout
-from utils.colors import colors
+from libqtile.config import Group
+
 import settings.keymap as keymap
+from utils.colors import colors
 
 with_margin = True
-margin = 15
+margin = 20
 
 
 def init_groups() -> list:
     groups = []
     group_names = keymap.workspaces_keybindings
-    # group_labels = ["Web", "Code", "Term", "Notes", "Notes", "Notes"]
-    group_labels = [str(i + 1) for i in range(6)]
-    group_layouts = ["monadtall" for _ in range(6)]
+    group_labels = ["www", "code", "term", "notes", "music", "other"]
+    # group_labels = [str(i + 1) for i in range(6)]
+    group_layouts = ["bsp" for _ in range(6)]
     group_matches = [*[None for _ in range(6)]]
 
     for i in range(len(group_names)):
@@ -33,7 +33,7 @@ def init_layouts() -> list:
     layout_theme = {
         "margin": margin if with_margin else 0,
         "border_width": 1,
-        "border_focus": colors.BLUE_500,
+        "border_focus": colors.BLUE_700,
         "border_normal": colors.BLUE_950,
     }
 

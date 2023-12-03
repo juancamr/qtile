@@ -26,7 +26,7 @@ def init_widgets():
 
     def init_widgets_list():
         spacer = widget.TextBox(text=" ", background=panel_background)
-        widgets_list = [
+        return [
             widget.Sep(
                 linewidth=0,
                 padding=6,
@@ -183,8 +183,6 @@ def init_widgets():
                 background=date_background,
             ),
         ]
-
-        return widgets_list
 
     widgets_list = init_widgets_list()
 

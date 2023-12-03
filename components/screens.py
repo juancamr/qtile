@@ -4,13 +4,14 @@ from libqtile import bar
 
 widgets_list = init_widgets()[1]
 
-def init_widgets_screen1():
-    widgets_screen1 = widgets_list
-    return widgets_screen1
 
-def init_widgets_screen2():
-    widgets_screen2 = widgets_list
-    return widgets_screen2
+def init_widgets_screen1() -> list:
+    return widgets_list
+
+
+def init_widgets_screen2() -> list:
+    return widgets_list
+
 
 widgets_screen1 = init_widgets_screen1()
 widgets_screen2 = init_widgets_screen2()

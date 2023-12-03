@@ -14,11 +14,7 @@ PRODUCT_SANS_BOLD_FONT = "Product Sans Bold"
 PAVUCONTROL = "pavucontrol"
 LOGOUT_COMMAND = "archlinux-logout"
 
-
 SCRIPT_PATH = "/.config/qtile/assets/scripts"
-# scripts
-# PYHASHER = f"{SCRIPT_PATH}/pyhasher.sh"
-# SETTINGS = f"{SCRIPT_PATH}/settings.sh"
 PYHASHER = f"python {HOME}/pyhasher/main.py &"
 OPEN_SETTINGS = f"code {HOME}/.config/qtile"
 AUTOSTART_SCRIPT = f"{SCRIPT_PATH}/autostart.sh"

@@ -26,10 +26,3 @@ screens = screens.init_screens()
     focus_on_window_activation,
     wmname,
 ) = set.get_settings()
-
-# fn
-new_client = fn.new_client
-logout_killed = fn.logout_killed
-start_once = fn.start_once
-start_always = fn.start_always
-set_floating = fn.set_floating

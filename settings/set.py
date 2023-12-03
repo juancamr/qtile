@@ -53,11 +53,12 @@ def get_settings():
             Match(wm_class="archlinux-logout"),
             Match(wm_class="xfce4-terminal"),
             Match(wm_class="thunar"),
+            Match(wm_class="Thunar"),
             Match(wm_class="pavucontrol"),
             Match(wm_class="shutter"),
         ],
         fullscreen_border_width=0,
-        border_width=2,
+        border_width=0,
     )
     auto_fullscreen = True
     focus_on_window_activation = "focus"  # or smart

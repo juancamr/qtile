@@ -8,6 +8,10 @@ def run_script(command: str):
     subprocess.call([HOME + command])
 
 
+def open_terminal_with_command(command: str):
+    subprocess.Popen(["alacritty", "-e", "bash", "-i", "-c", command])
+
+
 def random_wallpaper():
     wallpaper_directory = f"{HOME}/Pictures/wallpapers/"
 
@@ -32,3 +36,9 @@ def send_window_to_group(window: object, workspace: int):
     group = keymap.workspaces_keybindings[workspace]
     window.togroup(group)
     lazy.group[group].toscreen()
+
+
+def toggle_borders(window: object, is_empty: bool):
+    len_windows = len(window.qtile.current_group.windows)
+    count_windows = 0 if is_empty else 1
+    window.qtile.current_group.use_layout(3 if len_windows == count_windows else 0)

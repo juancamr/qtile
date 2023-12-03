@@ -1,8 +1,10 @@
+import subprocess
 from libqtile.config import Key
+from libqtile import qtile
 from libqtile.command import lazy
 from utils.constants import MOD, ALT, SHIFT, CONTROL
 from utils import constants as const
-from utils.utils import run_script
+from utils.utils import run_script, open_terminal_with_command
 from settings import functions
 import os
 
@@ -15,17 +17,21 @@ def init_custom_keys() -> list:
         Key([MOD], "x", lazy.spawn(const.LOGOUT_COMMAND)),
         Key([MOD], "d", lazy.spawn(const.DMENU)),
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
-        Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
+        Key([MOD], "o", lazy.function(lambda _: os.system(const.PYHASHER))),
         Key([MOD], "m", lazy.window.toggle_floating()),
         Key([MOD], "p", lazy.spawn("shutter -s")),
         Key([MOD, ALT], "s", lazy.function(lambda _: os.system(const.OPEN_SETTINGS))),
-        Key([MOD], "e", lazy.function(lambda _: os.system(const.PYHASHER))),
+        Key(
+            [MOD],
+            "e",
+            lazy.function(lambda _: open_terminal_with_command("code_in_path")),
+        ),
     ]
 
 
 def init_navigate_keys() -> list:
     return [
-        Key([MOD], "f", lazy.window.toggle_fullscreen()),
+        Key([MOD, SHIFT], "f", lazy.window.toggle_fullscreen()),
         Key([MOD], "q", lazy.window.kill()),
         Key([MOD, SHIFT], "q", lazy.window.kill()),
         Key([MOD, SHIFT], "i", lazy.restart()),
@@ -97,7 +103,7 @@ def init_navigate_keys() -> list:
             lazy.layout.shrink(),
             lazy.layout.increase_nmaster(),
         ),
-        Key([MOD, SHIFT], "f", lazy.layout.flip()),
+        # Key([MOD, SHIFT], "f", lazy.layout.flip()),
         Key([MOD, "mod1"], "k", lazy.layout.flip_up()),
         Key([MOD, "mod1"], "j", lazy.layout.flip_down()),
         Key([MOD, "mod1"], "l", lazy.layout.flip_right()),
