@@ -1,8 +1,7 @@
 from libqtile import layout
 from libqtile.config import Group
-
 import settings.keymap as keymap
-from utils.colors import colors
+from utils.theme import theme
 
 with_margin = True
 margin = 20
@@ -33,8 +32,8 @@ def init_layouts() -> list:
     layout_theme = {
         "margin": margin if with_margin else 0,
         "border_width": 1,
-        "border_focus": colors.BLUE_700,
-        "border_normal": colors.BLUE_950,
+        "border_focus": theme.border_active,
+        "border_normal": theme.border_inactive,
     }
 
     return [

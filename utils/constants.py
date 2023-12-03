@@ -1,11 +1,14 @@
+from utils.theme import theme
+from utils.colors import only
 import os
 
 TERMINAL = "alacritty"
 BROWSER = "firefox"
 OBSIDIAN = "obsidian"
 HOME = os.path.expanduser("~")
-DMENU = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'ProductSans:bold:pixelsize=14'"
+DMENU = f"dmenu_run -i -nb '{only(theme.panel_background)}' -nf '{only(theme.window_name)}' -sb '{only(theme.window_name)}' -sf '{only(theme.panel_background)}' -fn 'ProductSans:bold:pixelsize=14'"
 ICONS_PATH = [f"{HOME}/.config/qtile/assets/icons"]
+PYTHON_ICON = "~/.config/qtile/assets/icons/python.png"
 FONT_AWESOME = "FontAwesome"
 UBUNTU_FONT = "Ubuntu"
 UBUNTU_BOLD_FONT = "Ubuntu Bold"
