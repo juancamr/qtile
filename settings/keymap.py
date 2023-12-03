@@ -1,11 +1,8 @@
-import subprocess
 from libqtile.config import Key
-from libqtile import qtile
 from libqtile.command import lazy
+from utils import utils
 from utils.constants import MOD, ALT, SHIFT, CONTROL
 from utils import constants as const
-from utils.utils import run_script, open_terminal_with_command
-from settings import functions
 import os
 
 workspaces_keybindings = ["g", "c", "r", "t", "n", "s"]
@@ -19,13 +16,9 @@ def init_custom_keys() -> list:
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
         Key([MOD], "o", lazy.function(lambda _: os.system(const.PYHASHER))),
         Key([MOD], "m", lazy.window.toggle_floating()),
-        Key([MOD], "p", lazy.spawn("shutter -s")),
         Key([MOD, ALT], "s", lazy.function(lambda _: os.system(const.OPEN_SETTINGS))),
-        Key(
-            [MOD],
-            "e",
-            lazy.function(lambda _: open_terminal_with_command("code_in_path")),
-        ),
+        Key([MOD], "p", utils.capture_and_copy),
+        Key([MOD], "e", utils.open_code_with_fzf),
     ]
 
 

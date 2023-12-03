@@ -1,66 +1,12 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# Ignorar carpetas __pycache__
+**/__pycache__/
+
+# Ignorar archivos pyc generados
 *.pyc
-*.pyo
-*.pyd
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-env/
-build/
+# Ignorar carpetas generadas por herramientas como dist, build, etc.
 dist/
-eggs/
+build/
 *.egg-info/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-
-# Django
-*.log
-db.sqlite3
-db.sqlite3-journal
-
-# VS Code
-.vscode/
-
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# PyCharm
 .idea/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Pytest
-__pycache__/
-.pytest_cache/
-
-# Environments
-.env
-.venv
-venv/
-env/
-
-# macOS
-.DS_Store
-
-# Windows
-Thumbs.db
-desktop.ini
-
-# Python-generated files
-*.pyc
-__pycache__/
