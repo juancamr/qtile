@@ -1,4 +1,4 @@
-from settings import keymap, set, functions as fn
+from settings import keymap, set
 from components import layout, topbar, screens
 
 # navigate keys
