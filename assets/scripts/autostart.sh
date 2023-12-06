@@ -20,5 +20,7 @@ picom --config $HOME/.config/qtile/assets/scripts/picom.conf &
 run volumeicon &
 sh ~/.config/qtile/assets/scripts/keyboard.sh &
 parcellite --no-icon &
+
+firefox &
 #sh ~/.config/qtile/assets/scripts/hide_mouse.sh &
 #python ~/.config/qtile/assets/scripts/change_wallpaper.py

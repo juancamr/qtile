@@ -1,9 +1,11 @@
+"""module for get the topbar widgets"""
 from libqtile import qtile, widget
 from utils import constants as const, utils
 from utils.theme import theme, white_double, black_double
 
 
 def init_widgets():
+    """get the widgets"""
     widget_defaults = dict(
         font=const.PRODUCT_SANS_FONT,
         fontsize=12,
@@ -19,8 +21,8 @@ def init_widgets():
                 background=theme.panel_background,
             ),
             widget.Image(
-                filename=const.PYTHON_ICON,
-                margin=1,
+                filename=const.ICON_TOPBAR,
+                margin=4,
                 background=theme.panel_background,
                 mouse_callbacks={"Button1": utils.random_wallpaper},
             ),

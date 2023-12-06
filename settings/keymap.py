@@ -1,28 +1,35 @@
+"""setting keymaps for qtile"""
+import os
 from libqtile.config import Key
 from libqtile.command import lazy
-from utils import utils
+from utils import utils, constants as const
 from utils.constants import MOD, ALT, SHIFT, CONTROL
-from utils import constants as const
-import os
 
 workspaces_keybindings = ["g", "c", "r", "t", "n", "s"]
+workspaces = enumerate(workspaces_keybindings)
+groups_dict = {keybind: index for (index, keybind) in workspaces}
 
 
 def init_custom_keys() -> list:
+    """return my custom keymaps"""
+
     return [
         Key([MOD], "Return", lazy.spawn(const.TERMINAL)),
         Key([MOD], "x", lazy.spawn(const.LOGOUT_COMMAND)),
         Key([MOD], "d", lazy.spawn(const.DMENU)),
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
-        Key([MOD], "o", lazy.function(lambda _: os.system(const.PYHASHER))),
+        Key([MOD], "a", lazy.function(lambda _: os.system(const.PYHASHER))),
+        Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
         Key([MOD], "m", lazy.window.toggle_floating()),
         Key([MOD, ALT], "s", lazy.function(lambda _: os.system(const.OPEN_SETTINGS))),
         Key([MOD], "p", utils.capture_and_copy),
         Key([MOD], "e", utils.open_code_with_fzf),
+        Key([MOD, SHIFT], "e", lazy.spawn(const.THUNAR)),
     ]
 
 
 def init_navigate_keys() -> list:
+    """return keymaps that use qtile"""
     return [
         Key([MOD, SHIFT], "f", lazy.window.toggle_fullscreen()),
         Key([MOD], "q", lazy.window.kill()),
@@ -114,17 +121,34 @@ def init_navigate_keys() -> list:
 
 
 def add_workespaces_keys(groups, keys) -> list:
+    """esto es unicamente de prueba bolub"""
     keys = []
     for i in groups:
         keys.extend(
             [
                 Key([MOD], i.name, lazy.group[i.name].toscreen()),
-                Key([MOD, CONTROL], i.name, lazy.window.togroup(i.name)),
+                Key(
+                    [MOD, CONTROL],
+                    i.name,
+                    utils.toggle_borders_before_change_group,
+                    lazy.window.togroup(i.name),
+                    lazy.function(
+                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                            qtile, group_name, groups_dict
+                        )
+                    ),
+                ),
                 Key(
                     [MOD, SHIFT],
                     i.name,
+                    utils.toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
                     lazy.group[i.name].toscreen(),
+                    lazy.function(
+                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                            qtile, group_name, groups_dict
+                        )
+                    ),
                 ),
             ]
         )

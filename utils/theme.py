@@ -32,16 +32,16 @@ black_double = double(colors.GRAY_900)
 white_double = double(colors.ZINC_050)
 
 tokio = Theme(
-    first=double(colors.BLUE_600),
-    second=double(colors.INDIGO_600),
-    third=double(colors.VIOLET_600),
-    fourth=double(colors.PURPLE_600),
-    group_selected=double(colors.BLUE_600),
+    first=double(colors.BLUE_500),
+    second=double(colors.INDIGO_500),
+    third=double(colors.VIOLET_500),
+    fourth=double(colors.PURPLE_500),
+    group_selected=double(colors.INDIGO_600),
     group_inactive=double(colors.GRAY_600),
-    window_name=double(colors.YELLOW_500),
-    panel_background=double(colors.GRAY_800),
-    border_active=colors.BLUE_700,
-    border_inactive=colors.BLUE_950,
+    window_name=double(colors.INDIGO_400),
+    panel_background=double(colors.GRAY_950),
+    border_active=colors.INDIGO_500,
+    border_inactive=colors.INDIGO_950,
 )
 
 yellow = Theme(

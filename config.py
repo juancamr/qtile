@@ -1,4 +1,4 @@
-from settings import keymap, set
+from settings import keymap, set as myset, functions as fn
 from components import layout, topbar, screens
 
 # navigate keys
@@ -25,4 +25,9 @@ screens = screens.init_screens()
     auto_fullscreen,
     focus_on_window_activation,
     wmname,
-) = set.get_settings()
+) = myset.get_settings()
+
+new_client = fn.new_client
+kill_client = fn.kill_client
+start_once = fn.start_once
+set_floating = fn.set_floating

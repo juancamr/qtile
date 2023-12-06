@@ -2,10 +2,7 @@
 
 setxkbmap us -variant dvp
 
-xmodmap -e "keycode 94 = Shift_L Shift_L"
-xmodmap -e "keycode 9 = dollar asciitilde"
-xmodmap -e "keycode 31 = c C Escape"
-
+# spanish keymaps
 xmodmap -e "keycode 38 = a A aacute Aacute"
 xmodmap -e "keycode 40 = e E eacute Eacute"
 xmodmap -e "keycode 42 = i I iacute Iacute"
@@ -13,7 +10,16 @@ xmodmap -e "keycode 39 = o O oacute Oacute"
 xmodmap -e "keycode 41 = u U uacute Uacute"
 xmodmap -e "keycode 46 = n N ntilde Ntilde"
 xmodmap -e "keycode 34 = slash question questiondown"
+xmodmap -e "keycode 20 = exclam 8 exclamdown"
+
+# custom keymaps
+xmodmap -e "keycode 94 = Shift_L Shift_L"
+xmodmap -e "keycode 9 = dollar asciitilde"
+xmodmap -e "keycode 31 = c C Escape"
 xmodmap -e "keycode 54 = j J Down"
 xmodmap -e "keycode 55 = k K Up"
+xmodmap -e "keycode 59 = w w W W"
+xmodmap -e "keycode 51 = Return Return"
+xmodmap -e "keycode 36 = backslash bar"
 
 xmodmap -e "keycode 108 = Mode_switch"

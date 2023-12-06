@@ -5,12 +5,12 @@ from utils import utils, constants as const
 
 @hook.subscribe.client_new
 def new_client(window):
-    utils.toggle_borders(window, True)
+    utils.toggle_borders(window.qtile.current_group, True)
 
 
 @hook.subscribe.client_killed
 def kill_client(window):
-    utils.toggle_borders(window, False)
+    utils.toggle_borders(window.qtile.current_group, False)
 
 
 @hook.subscribe.startup_once

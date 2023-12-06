@@ -1,22 +1,30 @@
-import os, random, subprocess
-from utils.constants import HOME
+"""utils for the entire project"""
+import os
+import random
+import subprocess
 from libqtile.lazy import lazy
+from libqtile.log_utils import logger
+from utils.constants import HOME, SHUTTER_COMMAND, SCREENSHOT_PATH
 
 
 @lazy.function
 def open_code_with_fzf(_):
+    """funcion que permite la aperturad e vscode usando fzf"""
     subprocess.Popen(["alacritty", "-e", "bash", "-i", "-c", "code_in_path"])
 
 
 @lazy.function
 def capture_and_copy(_):
-    screenshot_path = "/tmp/temp_capture.png"
-    capture_command = f"shutter -s -e -o {screenshot_path} && xclip -selection clipboard -target image/png -i {screenshot_path}"
-    subprocess.run(capture_command, shell=True)
-    os.remove(screenshot_path)
+    """funcion que realiza una seleccion para capturar
+    la pantalla para posteriormente copiarla al portapapeles"""
+    capture_command = SHUTTER_COMMAND
+    subprocess.run(capture_command, shell=True, check=True)
+    os.remove(SCREENSHOT_PATH)
 
 
 def random_wallpaper():
+    """establece un background wallpaper de manera
+    aleatoria en la carpeta 'walllpaper_directory'"""
     wallpaper_directory = f"{HOME}/Pictures/wallpapers/"
     image_formats = (".png", ".jpg", ".jpeg")
     image_files = [
@@ -31,13 +39,28 @@ def random_wallpaper():
     os.system(f"feh --bg-fill {image_path}")
 
 
-def toggle_borders(window: object, is_empty: bool):
-    len_windows = len(window.qtile.current_group.windows)
-    count_windows = 0 if is_empty else 1
-    window.qtile.current_group.use_layout(3 if len_windows == count_windows else 0)
+def toggle_borders(group, is_for_open: bool, is_for_migrate=False):
+    """function to change dynamically from bsp to monadtall"""
+    logger.warning(group)
+    len_windows = len(group.windows)
+    logger.warning(len_windows)
+    count_windows = 0 if is_for_open else 2 if is_for_migrate else 1
+    group.use_layout(3 if len_windows == count_windows else 0)
 
 
-# def send_window_to_group(window: object, workspace: int):
-#     group = keymap.workspaces_keybindings[workspace]
-#     window.togroup(group)
-#     lazy.group[group].toscreen()
+@lazy.function
+def toggle_borders_before_change_group(qtile):
+    """verifica si en el actual group queda unicaemnte una ventana"""
+    toggle_borders(qtile.current_group, False, is_for_migrate=True)
+
+
+def toggle_borders_after_change_group(qtile, group_name, groups_dict: dict):
+    """despues de cambiar entre grupos verifica el estado
+    de esta contando la cantidad de ventanas actuales"""
+    logger.warning(group_name)
+    index_group = groups_dict[group_name]
+    group = qtile.groups[index_group]
+    if len(group.windows) == 1:
+        toggle_borders(group, False)
+    else:
+        toggle_borders(group, True)
