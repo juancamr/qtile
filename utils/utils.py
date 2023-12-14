@@ -7,9 +7,13 @@ from libqtile.log_utils import logger
 from utils.constants import HOME, SHUTTER_COMMAND, SCREENSHOT_PATH
 
 
+def run_command_with_terminal(command: str):
+    subprocess.Popen(["alacritty", "-e", "bash", "-i", "-c", command])
+
+
 @lazy.function
 def open_code_with_fzf(_):
-    """funcion que permite la aperturad e vscode usando fzf"""
+    """funcion que permite la apertura de vscode usando fzf"""
     subprocess.Popen(["alacritty", "-e", "bash", "-i", "-c", "code_in_path"])
 
 

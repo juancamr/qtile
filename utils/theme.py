@@ -31,6 +31,19 @@ colors = Colors()
 black_double = double(colors.GRAY_900)
 white_double = double(colors.ZINC_050)
 
+gta = Theme(
+    first=double(colors.RED_500),
+    second=double(colors.ORANGE_500),
+    third=double(colors.AMBER_500),
+    fourth=double(colors.YELLOW_500),
+    group_selected=double(colors.INDIGO_600),
+    group_inactive=double(colors.GRAY_600),
+    window_name=double(colors.INDIGO_400),
+    panel_background=double(colors.GRAY_950),
+    border_active=colors.INDIGO_500,
+    border_inactive=colors.INDIGO_950,
+)
+
 tokio = Theme(
     first=double(colors.BLUE_500),
     second=double(colors.INDIGO_500),

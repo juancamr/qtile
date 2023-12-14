@@ -5,7 +5,7 @@ from libqtile.command import lazy
 from utils import utils, constants as const
 from utils.constants import MOD, ALT, SHIFT, CONTROL
 
-workspaces_keybindings = ["g", "c", "r", "t", "n", "s"]
+workspaces_keybindings = ["h", "t", "n", "s", "c", "r"]
 workspaces = enumerate(workspaces_keybindings)
 groups_dict = {keybind: index for (index, keybind) in workspaces}
 
@@ -15,16 +15,22 @@ def init_custom_keys() -> list:
 
     return [
         Key([MOD], "Return", lazy.spawn(const.TERMINAL)),
+        Key([MOD, SHIFT], "Return", lazy.spawn(const.THUNAR)),
         Key([MOD], "x", lazy.spawn(const.LOGOUT_COMMAND)),
         Key([MOD], "d", lazy.spawn(const.DMENU)),
         Key([MOD], "b", lazy.spawn(const.BROWSER)),
         Key([MOD], "a", lazy.function(lambda _: os.system(const.PYHASHER))),
         Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
         Key([MOD], "m", lazy.window.toggle_floating()),
-        Key([MOD, ALT], "s", lazy.function(lambda _: os.system(const.OPEN_SETTINGS))),
+        Key(
+            [MOD, ALT],
+            "s",
+            lazy.function(
+                lambda _: utils.run_command_with_terminal(const.OPEN_SETTINGS)
+            ),
+        ),
         Key([MOD], "p", utils.capture_and_copy),
         Key([MOD], "e", utils.open_code_with_fzf),
-        Key([MOD, SHIFT], "e", lazy.spawn(const.THUNAR)),
     ]
 
 
@@ -41,7 +47,7 @@ def init_navigate_keys() -> list:
         Key([MOD], "Right", lazy.layout.right()),
         Key([MOD], "k", lazy.layout.up()),
         Key([MOD], "j", lazy.layout.down()),
-        Key([MOD], "h", lazy.layout.left()),
+        Key([MOD], "g", lazy.layout.left()),
         Key([MOD], "l", lazy.layout.right()),
         Key(
             [MOD, CONTROL],
@@ -61,7 +67,7 @@ def init_navigate_keys() -> list:
         ),
         Key(
             [MOD, CONTROL],
-            "h",
+            "g",
             lazy.layout.grow_left(),
             lazy.layout.shrink(),
             lazy.layout.decrease_ratio(),
@@ -107,10 +113,10 @@ def init_navigate_keys() -> list:
         Key([MOD, "mod1"], "k", lazy.layout.flip_up()),
         Key([MOD, "mod1"], "j", lazy.layout.flip_down()),
         Key([MOD, "mod1"], "l", lazy.layout.flip_right()),
-        Key([MOD, "mod1"], "h", lazy.layout.flip_left()),
+        Key([MOD, "mod1"], "g", lazy.layout.flip_left()),
         Key([MOD, SHIFT], "k", lazy.layout.shuffle_up()),
         Key([MOD, SHIFT], "j", lazy.layout.shuffle_down()),
-        Key([MOD, SHIFT], "h", lazy.layout.shuffle_left()),
+        Key([MOD, SHIFT], "g", lazy.layout.shuffle_left()),
         Key([MOD, SHIFT], "l", lazy.layout.shuffle_right()),
         Key([MOD, SHIFT], "Up", lazy.layout.shuffle_up()),
         Key([MOD, SHIFT], "Down", lazy.layout.shuffle_down()),
@@ -133,7 +139,8 @@ def add_workespaces_keys(groups, keys) -> list:
                     utils.toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
                     lazy.function(
-                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile,
+                        group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),
@@ -145,7 +152,8 @@ def add_workespaces_keys(groups, keys) -> list:
                     lazy.window.togroup(i.name),
                     lazy.group[i.name].toscreen(),
                     lazy.function(
-                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile,
+                        group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),

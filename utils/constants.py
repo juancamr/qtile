@@ -6,6 +6,7 @@ TERMINAL = "alacritty"
 BROWSER = "firefox"
 OBSIDIAN = "obsidian"
 THUNAR = "thunar"
+CODE = "code"
 HOME = os.path.expanduser("~")
 DMENU = f"dmenu_run -i -nb '{only(theme.panel_background)}' -nf '{only(theme.window_name)}' -sb '{only(theme.window_name)}' -sf '{only(theme.panel_background)}' -fn 'ProductSans:bold:pixelsize=14'"
 ICONS_PATH = [f"{HOME}/.config/qtile/assets/icons"]
@@ -22,7 +23,7 @@ SHUTTER_COMMAND = f"shutter -s -e -o {SCREENSHOT_PATH} && xclip -selection clipb
 
 SCRIPT_PATH = "/.config/qtile/assets/scripts"
 PYHASHER = f"python {HOME}/pyhasher/main.py &"
-OPEN_SETTINGS = f"code {HOME}/.config/qtile"
+OPEN_SETTINGS = f"cd {HOME}/.config/qtile; nvim ."
 AUTOSTART_SCRIPT = f"{SCRIPT_PATH}/autostart.sh"
 CHANGE_OUTPUT = f"{SCRIPT_PATH}/audio.sh"
 
