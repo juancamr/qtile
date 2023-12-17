@@ -13,7 +13,8 @@ run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
 
-picom --config $HOME/.config/qtile/assets/scripts/picom.conf &
+# picom --config $HOME/.config/qtile/assets/scripts/picom.conf &
+picom --experimental-backends &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 

@@ -12,6 +12,7 @@ def init_widgets():
         padding=2,
         background=theme.panel_background,
     )
+    font_size = 13
 
     def init_widgets_list():
         return [
@@ -33,7 +34,7 @@ def init_widgets():
             ),
             widget.GroupBox(
                 font=const.PRODUCT_SANS_BOLD_FONT,
-                fontsize=12,
+                fontsize=font_size,
                 margin_y=2,
                 margin_x=0,
                 padding_y=5,
@@ -61,7 +62,7 @@ def init_widgets():
                 foreground=theme.window_name,
                 font=const.PRODUCT_SANS_BOLD_FONT,
                 background=theme.panel_background,
-                fontsize=13,
+                fontsize=font_size,
                 padding=0,
             ),
             widget.TextBox(
@@ -88,7 +89,7 @@ def init_widgets():
                     "Button1": lambda: qtile.cmd_spawn(const.TERMINAL + " -e htop")
                 },
                 padding=5,
-                fontsize=13,
+                fontsize=font_size,
             ),
             widget.TextBox(
                 text=const.CORNER_ICON,
@@ -100,7 +101,7 @@ def init_widgets():
             ),
             widget.TextBox(
                 text=const.VOLUME_ICON,
-                fontsize=23,
+                fontsize=20,
                 font=const.FONT_AWESOME,
                 foreground=black_double,
                 background=theme.second,
@@ -116,7 +117,7 @@ def init_widgets():
                 foreground=black_double,
                 background=theme.second,
                 padding=5,
-                fontsize=13,
+                fontsize=font_size,
             ),
             widget.TextBox(
                 text=const.CORNER_ICON,
@@ -131,7 +132,7 @@ def init_widgets():
                 foreground=black_double,
                 background=theme.third,
                 padding=0,
-                scale=0.7,
+                scale=0.6,
             ),
             widget.Sep(
                 linewidth=0,
@@ -141,7 +142,7 @@ def init_widgets():
             ),
             widget.CurrentLayout(
                 foreground=black_double,
-                fontsize=13,
+                fontsize=font_size,
                 background=theme.third,
                 padding=5,
                 font=const.PRODUCT_SANS_BOLD_FONT,
@@ -158,7 +159,7 @@ def init_widgets():
                 foreground=black_double,
                 background=theme.fourth,
                 font=const.PRODUCT_SANS_BOLD_FONT,
-                fontsize=13,
+                fontsize=font_size,
                 format="%B %d - %H:%M",
             ),
             widget.Sep(

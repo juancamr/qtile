@@ -6,7 +6,7 @@ from settings import keymap
 from utils.theme import theme
 
 WITH_MARGIN = True
-MARGIN = 15
+MARGIN = 0
 
 
 def init_groups() -> list:
