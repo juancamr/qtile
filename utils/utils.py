@@ -68,3 +68,13 @@ def toggle_borders_after_change_group(qtile, group_name, groups_dict: dict):
         toggle_borders(group, False)
     else:
         toggle_borders(group, True)
+
+
+@lazy.function
+def volume_up(qtile):
+    qtile.cmd_spawn("amixer -D pulse sset Master 5%+")
+
+
+@lazy.function
+def volume_down(qtile):
+    qtile.cmd_spawn("amixer -D pulse sset Master 5%-")

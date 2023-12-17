@@ -31,6 +31,8 @@ def init_custom_keys() -> list:
         ),
         Key([MOD], "p", utils.capture_and_copy),
         Key([MOD], "e", utils.open_code_with_fzf),
+        Key([MOD], "v", utils.volume_up),
+        Key([MOD, SHIFT], "v", utils.volume_down),
     ]
 
 
@@ -139,8 +141,7 @@ def add_workespaces_keys(groups, keys) -> list:
                     utils.toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
                     lazy.function(
-                        lambda qtile,
-                        group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),
@@ -152,8 +153,7 @@ def add_workespaces_keys(groups, keys) -> list:
                     lazy.window.togroup(i.name),
                     lazy.group[i.name].toscreen(),
                     lazy.function(
-                        lambda qtile,
-                        group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),

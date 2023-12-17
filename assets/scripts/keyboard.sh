@@ -15,21 +15,27 @@ xmodmap -e "keycode 20 = exclam 8 exclamdown"
 # by type of keyboard
 xmodmap -e "keycode 94 = Shift_L Shift_L"
 xmodmap -e "keycode 9 = dollar asciitilde"
-xmodmap -e "keycode 31 = c C Escape"
-
-# navigate keys
-xmodmap -e "keycode 54 = j J Down"
-xmodmap -e "keycode 55 = k K Up"
-xmodmap -e "keycode 44 = h H Left"
-xmodmap -e "keycode 33 = l L Right"
 
 # for comfort
 xmodmap -e "keycode 59 = w w W W" # para no confundirme con vim xd
-xmodmap -e "keycode 26 = period greater greater"
 xmodmap -e "keycode 36 = backslash bar" # also depends on the keyboard
-xmodmap -e "keycode 18 = plus 4 minus"
-xmodmap -e "keycode 48 = Return underscore"
+xmodmap -e "keycode 26 = period greater greater"
+xmodmap -e "keycode 48 = Return underscore NoSymbol NoSymbol"
 
 # modifier keys
-xmodmap -e "keycode 66 = Mode_switch Caps_Lock"
-xmodmap -e "keycode 51 = minus underscore"
+xmodmap -e "keycode 66 = Mode_switch"
+xmodmap -e "keycode 51 = NoSymbol"
+
+xmodmap -e "keycode 61 = Shift_R Shift_R"
+xmodmap -e "keycode 108 = Caps_Lock"
+xmodmap -e "keycode 62 = z Z z Z"
+
+
+# custom mappings
+xmodmap -e "keycode 54 = j J Down"
+xmodmap -e "keycode 55 = k K Up"
+xmodmap -e "keycode 33 = l L Right"
+xmodmap -e "keycode 30 = g G Left"
+xmodmap -e "keycode 45 = t T minus"
+xmodmap -e "keycode 31 = c C Escape"
+xmodmap -e "keycode 32 = r R asciitilde"
