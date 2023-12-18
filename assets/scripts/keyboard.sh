@@ -30,12 +30,13 @@ xmodmap -e "keycode 61 = Shift_R Shift_R"
 xmodmap -e "keycode 108 = Caps_Lock"
 xmodmap -e "keycode 62 = z Z z Z"
 
-
 # custom mappings
 xmodmap -e "keycode 54 = j J Down"
 xmodmap -e "keycode 55 = k K Up"
 xmodmap -e "keycode 33 = l L Right"
 xmodmap -e "keycode 30 = g G Left"
+xmodmap -e "keycode 44 = h H Home"
+xmodmap -e "keycode 32 = r R End"
+
 xmodmap -e "keycode 45 = t T minus"
 xmodmap -e "keycode 31 = c C Escape"
-xmodmap -e "keycode 32 = r R asciitilde"

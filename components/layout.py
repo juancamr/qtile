@@ -14,7 +14,14 @@ def init_groups() -> list:
 
     groups = []
     group_names = keymap.workspaces_keybindings
-    group_labels = ["www", "code", "term", "notes", "music", "other"]
+    group_labels = [
+        "www (h)",
+        "editor (t)",
+        "term (n)",
+        "notes (s)",
+        "music (c)",
+        "other (r)",
+    ]
     # group_labels = [str(i + 1) for i in range(6)]
     group_layouts = ["bsp" for _ in range(6)]
     group_matches = [[Match(wm_class="firefox")], *[None for _ in range(5)]]
