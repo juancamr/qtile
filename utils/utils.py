@@ -3,7 +3,6 @@ import os
 import random
 import subprocess
 from libqtile.lazy import lazy
-from libqtile.log_utils import logger
 from utils.constants import HOME, SHUTTER_COMMAND, SCREENSHOT_PATH
 
 
@@ -45,9 +44,7 @@ def random_wallpaper():
 
 def toggle_borders(group, is_for_open: bool, is_for_migrate=False):
     """function to change dynamically from bsp to monadtall"""
-    logger.warning(group)
     len_windows = len(group.windows)
-    logger.warning(len_windows)
     count_windows = 0 if is_for_open else 2 if is_for_migrate else 1
     group.use_layout(3 if len_windows == count_windows else 0)
 
@@ -61,7 +58,6 @@ def toggle_borders_before_change_group(qtile):
 def toggle_borders_after_change_group(qtile, group_name, groups_dict: dict):
     """despues de cambiar entre grupos verifica el estado
     de esta contando la cantidad de ventanas actuales"""
-    logger.warning(group_name)
     index_group = groups_dict[group_name]
     group = qtile.groups[index_group]
     if len(group.windows) == 1:

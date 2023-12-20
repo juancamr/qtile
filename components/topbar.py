@@ -16,17 +16,17 @@ def init_widgets():
 
     def init_widgets_list():
         return [
-            widget.Sep(
-                linewidth=0,
-                padding=6,
-                background=theme.panel_background,
-            ),
-            widget.Image(
-                filename=const.ICON_TOPBAR,
-                margin=4,
-                background=theme.panel_background,
-                mouse_callbacks={"Button1": utils.random_wallpaper},
-            ),
+            # widget.Sep(
+            #     linewidth=0,
+            #     padding=6,
+            #     background=theme.panel_background,
+            # ),
+            # widget.Image(
+            #     filename=const.ICON_TOPBAR,
+            #     margin=4,
+            #     background=theme.panel_background,
+            #     mouse_callbacks={"Button1": utils.random_wallpaper},
+            # ),
             widget.Sep(
                 linewidth=0,
                 padding=5,
@@ -42,7 +42,7 @@ def init_widgets():
                 borderwidth=3,
                 active=white_double,
                 inactive=theme.group_inactive,
-                rounded=False,
+                rounded=True,
                 highlight_method="block",  # block
                 urgent_alert_method="block",
                 this_current_screen_border=theme.group_selected,
@@ -76,13 +76,13 @@ def init_widgets():
             widget.TextBox(
                 text=const.MEMORY_ICON,
                 font=const.FONT_AWESOME,
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.first,
                 padding=0,
                 fontsize=14,
             ),
             widget.Memory(
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.first,
                 font=const.PRODUCT_SANS_BOLD_FONT,
                 mouse_callbacks={
@@ -103,7 +103,7 @@ def init_widgets():
                 text=const.VOLUME_ICON,
                 fontsize=20,
                 font=const.FONT_AWESOME,
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.second,
                 padding=0,
                 mouse_callbacks={
@@ -114,7 +114,7 @@ def init_widgets():
             ),
             widget.Volume(
                 font=const.PRODUCT_SANS_BOLD_FONT,
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.second,
                 padding=5,
                 fontsize=font_size,
@@ -141,7 +141,7 @@ def init_widgets():
                 background=theme.third,
             ),
             widget.CurrentLayout(
-                foreground=black_double,
+                foreground=white_double,
                 fontsize=font_size,
                 background=theme.third,
                 padding=5,
@@ -156,7 +156,7 @@ def init_widgets():
                 fontsize=48.9,
             ),
             widget.Clock(
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.fourth,
                 font=const.PRODUCT_SANS_BOLD_FONT,
                 fontsize=font_size,
@@ -165,7 +165,7 @@ def init_widgets():
             widget.Sep(
                 linewidth=0,
                 padding=10,
-                foreground=black_double,
+                foreground=white_double,
                 background=theme.fourth,
             ),
         ]

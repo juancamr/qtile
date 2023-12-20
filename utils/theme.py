@@ -36,9 +36,9 @@ gta = Theme(
     second=double(colors.ORANGE_500),
     third=double(colors.AMBER_500),
     fourth=double(colors.YELLOW_500),
-    group_selected=double(colors.INDIGO_600),
+    group_selected=double(colors.RED_500),
     group_inactive=double(colors.GRAY_600),
-    window_name=double(colors.INDIGO_400),
+    window_name=double(colors.YELLOW_500),
     panel_background=double(colors.GRAY_950),
     border_active=colors.INDIGO_500,
     border_inactive=colors.INDIGO_950,
@@ -51,7 +51,7 @@ tokio = Theme(
     fourth=double(colors.PURPLE_500),
     group_selected=double(colors.INDIGO_600),
     group_inactive=double(colors.GRAY_600),
-    window_name=double(colors.INDIGO_400),
+    window_name=double(colors.ZINC_050),
     panel_background=double(colors.GRAY_950),
     border_active=colors.INDIGO_500,
     border_inactive=colors.INDIGO_950,
@@ -70,4 +70,17 @@ yellow = Theme(
     border_inactive=colors.YELLOW_950,
 )
 
-theme = tokio
+minimal = Theme(
+    first=double(colors.GRAY_950),
+    second=double(colors.GRAY_950),
+    third=double(colors.GRAY_950),
+    fourth=double(colors.GRAY_950),
+    group_selected=double(colors.GRAY_800),
+    group_inactive=double(colors.GRAY_600),
+    window_name=double(colors.ZINC_050),
+    panel_background=double(colors.GRAY_950),
+    border_active=double(colors.YELLOW_700),
+    border_inactive=double(colors.GRAY_950),
+)
+
+theme = minimal
