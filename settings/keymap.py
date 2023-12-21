@@ -3,7 +3,7 @@ import os
 from libqtile.config import Key
 from libqtile.command import lazy
 from utils import utils, constants as const
-from utils.constants import MOD, ALT, SHIFT, CONTROL
+from utils.constants import MOD, SHIFT, CONTROL
 
 workspaces_keybindings = ["h", "t", "n", "s", "c", "r"]
 workspaces = enumerate(workspaces_keybindings)
@@ -22,13 +22,6 @@ def init_custom_keys() -> list:
         Key([MOD], "a", lazy.function(lambda _: os.system(const.PYHASHER))),
         Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
         Key([MOD], "m", lazy.window.toggle_floating()),
-        Key(
-            [MOD, ALT],
-            "s",
-            lazy.function(
-                lambda _: utils.run_command_with_terminal(const.OPEN_SETTINGS)
-            ),
-        ),
         Key([MOD], "p", utils.capture_and_copy),
         Key([MOD], "e", utils.open_code_with_fzf),
         Key([MOD], "v", utils.volume_up),

@@ -33,7 +33,7 @@ def init_widgets():
                 background=theme.panel_background,
             ),
             widget.GroupBox(
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
                 fontsize=font_size,
                 margin_y=2,
                 margin_x=0,
@@ -60,7 +60,7 @@ def init_widgets():
             ),
             widget.WindowName(
                 foreground=theme.window_name,
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
                 background=theme.panel_background,
                 fontsize=font_size,
                 padding=0,
@@ -85,7 +85,7 @@ def init_widgets():
             widget.Memory(
                 foreground=white_double,
                 background=theme.first,
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
                 mouse_callbacks={
                     "Button1": lambda: qtile.cmd_spawn(const.TERMINAL + " -e htop")
                 },
@@ -114,7 +114,7 @@ def init_widgets():
                 },
             ),
             widget.Volume(
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
                 foreground=white_double,
                 background=theme.second,
                 padding=5,
@@ -146,7 +146,7 @@ def init_widgets():
                 fontsize=font_size,
                 background=theme.third,
                 padding=5,
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
             ),
             widget.TextBox(
                 text=const.CORNER_ICON,
@@ -159,7 +159,7 @@ def init_widgets():
             widget.Clock(
                 foreground=white_double,
                 background=theme.fourth,
-                font=const.PRODUCT_SANS_BOLD_FONT,
+                font=const.PRODUCT_SANS_FONT,
                 fontsize=font_size,
                 format="%B %d - %H:%M",
             ),
