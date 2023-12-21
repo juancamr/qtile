@@ -42,7 +42,7 @@ def init_widgets():
                 borderwidth=3,
                 active=white_double,
                 inactive=theme.group_inactive,
-                rounded=True,
+                rounded=False,
                 highlight_method="block",  # block
                 urgent_alert_method="block",
                 this_current_screen_border=theme.group_selected,
@@ -65,6 +65,7 @@ def init_widgets():
                 fontsize=font_size,
                 padding=0,
             ),
+            widget.Systray(),
             widget.TextBox(
                 text=const.CORNER_ICON,
                 font=const.FONT_AWESOME,

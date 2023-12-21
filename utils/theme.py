@@ -71,14 +71,14 @@ yellow = Theme(
 )
 
 minimal = Theme(
-    first=double(colors.GRAY_950),
-    second=double(colors.GRAY_950),
-    third=double(colors.GRAY_950),
-    fourth=double(colors.GRAY_950),
+    first=double(colors.ZINC_900),
+    second=double(colors.ZINC_900),
+    third=double(colors.ZINC_900),
+    fourth=double(colors.ZINC_900),
     group_selected=double(colors.GRAY_800),
-    group_inactive=double(colors.GRAY_600),
+    group_inactive=double(colors.ZINC_600),
     window_name=double(colors.ZINC_050),
-    panel_background=double(colors.GRAY_950),
+    panel_background=double(colors.ZINC_900),
     border_active=double(colors.YELLOW_700),
     border_inactive=double(colors.GRAY_950),
 )
