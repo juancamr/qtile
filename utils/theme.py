@@ -75,11 +75,11 @@ minimal = Theme(
     second=double(colors.ZINC_900),
     third=double(colors.ZINC_900),
     fourth=double(colors.ZINC_900),
-    group_selected=double(colors.GRAY_800),
+    group_selected=double(colors.BLUE_800),
     group_inactive=double(colors.ZINC_600),
     window_name=double(colors.ZINC_050),
     panel_background=double(colors.ZINC_900),
-    border_active=double(colors.YELLOW_700),
+    border_active=double(colors.BLUE_800),
     border_inactive=double(colors.GRAY_950),
 )
 
