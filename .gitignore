@@ -10,3 +10,4 @@ build/
 *.egg-info/
 
 .idea/
+assets/scripts/keymaps/custom_keymaps.sh
