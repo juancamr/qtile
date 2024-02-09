@@ -7,4 +7,3 @@ xmodmap -e "keycode 41 = u U uacute Uacute"
 xmodmap -e "keycode 46 = n N ntilde Ntilde"
 xmodmap -e "keycode 34 = slash question questiondown"
 xmodmap -e "keycode 20 = exclam 8 exclamdown"
-

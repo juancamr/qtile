@@ -13,15 +13,15 @@ run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
 
-# picom --config $HOME/.config/qtile/assets/scripts/picom.conf &
-picom --experimental-backends &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
+firefox &
+# obsidian &
+# anki-woodrow.anki &
+
+picom --experimental-backends &
 run volumeicon &
 sh ~/.config/qtile/assets/scripts/keyboard.sh &
 parcellite --no-icon &
-
-firefox &
-#sh ~/.config/qtile/assets/scripts/hide_mouse.sh &
-#python ~/.config/qtile/assets/scripts/change_wallpaper.py
+nitrogen --restore

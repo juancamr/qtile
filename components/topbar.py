@@ -14,24 +14,10 @@ def init_widgets():
     )
     font_size = 13
 
+    spacer = widget.Sep( linewidth=0, padding=5, background=theme.panel_background)
+
     def init_widgets_list():
         return [
-            # widget.Sep(
-            #     linewidth=0,
-            #     padding=6,
-            #     background=theme.panel_background,
-            # ),
-            # widget.Image(
-            #     filename=const.ICON_TOPBAR,
-            #     margin=4,
-            #     background=theme.panel_background,
-            #     mouse_callbacks={"Button1": utils.random_wallpaper},
-            # ),
-            widget.Sep(
-                linewidth=0,
-                padding=5,
-                background=theme.panel_background,
-            ),
             widget.GroupBox(
                 font=const.PRODUCT_SANS_FONT,
                 fontsize=font_size,
@@ -66,14 +52,7 @@ def init_widgets():
                 padding=0,
             ),
             widget.Systray(),
-            widget.TextBox(
-                text=const.CORNER_ICON,
-                font=const.FONT_AWESOME,
-                background=theme.panel_background,
-                foreground=theme.first,
-                padding=0,
-                fontsize=48.9,
-            ),
+            spacer,
             widget.TextBox(
                 text=const.MEMORY_ICON,
                 font=const.FONT_AWESOME,
@@ -92,14 +71,7 @@ def init_widgets():
                 padding=5,
                 fontsize=font_size,
             ),
-            widget.TextBox(
-                text=const.CORNER_ICON,
-                font=const.FONT_AWESOME,
-                background=theme.first,
-                foreground=theme.second,
-                padding=0,
-                fontsize=48.9,
-            ),
+            spacer,
             widget.TextBox(
                 text=const.VOLUME_ICON,
                 fontsize=20,
@@ -120,14 +92,7 @@ def init_widgets():
                 padding=5,
                 fontsize=font_size,
             ),
-            widget.TextBox(
-                text=const.CORNER_ICON,
-                font=const.FONT_AWESOME,
-                background=theme.second,
-                foreground=theme.third,
-                padding=0,
-                fontsize=48.9,
-            ),
+            spacer,
             widget.CurrentLayoutIcon(
                 custom_icon_paths=const.ICONS_PATH,
                 foreground=black_double,
@@ -148,14 +113,7 @@ def init_widgets():
                 padding=5,
                 font=const.PRODUCT_SANS_FONT,
             ),
-            widget.TextBox(
-                text=const.CORNER_ICON,
-                font=const.FONT_AWESOME,
-                background=theme.third,
-                foreground=theme.fourth,
-                padding=0,
-                fontsize=48.9,
-            ),
+            spacer,
             widget.Clock(
                 foreground=white_double,
                 background=theme.fourth,
@@ -163,12 +121,7 @@ def init_widgets():
                 fontsize=font_size,
                 format="%B %d - %H:%M",
             ),
-            widget.Sep(
-                linewidth=0,
-                padding=10,
-                foreground=white_double,
-                background=theme.fourth,
-            ),
+            spacer,
         ]
 
     widgets_list = init_widgets_list()

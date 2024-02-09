@@ -11,20 +11,15 @@ MARGIN = 0
 
 def init_groups() -> list:
     """initialize groups"""
+    firefox_match = Match(wm_class="firefox")
+    obsidian_match = Match(wm_class="obsidian")
+    anki_match = Match(wm_class="anki")
 
     groups = []
     group_names = keymap.workspaces_keybindings
-    group_labels = [
-        "www (h)",
-        "editor (t)",
-        "term (n)",
-        "notes (s)",
-        "music (c)",
-        "other (r)",
-    ]
-    # group_labels = [str(i + 1) for i in range(6)]
+    group_labels = [ "h", "t", "n", "s", "c", "r" ]
     group_layouts = ["bsp" for _ in range(6)]
-    group_matches = [[Match(wm_class="firefox")], *[None for _ in range(5)]]
+    group_matches = [[firefox_match], [obsidian_match], [anki_match], [], [], []]
 
     for name, layout_c, label, matches in zip(
         group_names, group_layouts, group_labels, group_matches

@@ -23,7 +23,7 @@ def init_custom_keys() -> list:
         Key([MOD], "o", lazy.spawn(const.OBSIDIAN)),
         Key([MOD], "m", lazy.window.toggle_floating()),
         Key([MOD], "p", utils.capture_and_copy),
-        Key([MOD], "e", utils.open_code_with_fzf),
+        Key([MOD], "e", lazy.spawn(const.THUNAR)),
         Key([MOD], "v", utils.volume_up),
         Key([MOD, SHIFT], "v", utils.volume_down),
     ]
