@@ -1,7 +1,7 @@
 """module for get the topbar widgets"""
 from libqtile import qtile, widget
-from utils import constants as const, utils
-from utils.theme import theme, white_double, black_double
+from juancamr.utils import constants as const
+from juancamr.utils.theme import theme, white_double
 
 
 def init_widgets():
@@ -14,7 +14,7 @@ def init_widgets():
     )
     font_size = 13
 
-    spacer = widget.Sep( linewidth=0, padding=5, background=theme.panel_background)
+    spacer = widget.Sep(linewidth=0, padding=5, background=theme.panel_background)
 
     def init_widgets_list():
         return [
@@ -59,7 +59,7 @@ def init_widgets():
                 foreground=white_double,
                 background=theme.first,
                 padding=0,
-                fontsize=14,
+                fontsize=12,
             ),
             widget.Memory(
                 foreground=white_double,
@@ -74,7 +74,7 @@ def init_widgets():
             spacer,
             widget.TextBox(
                 text=const.VOLUME_ICON,
-                fontsize=20,
+                fontsize=16,
                 font=const.FONT_AWESOME,
                 foreground=white_double,
                 background=theme.second,
@@ -91,20 +91,6 @@ def init_widgets():
                 background=theme.second,
                 padding=5,
                 fontsize=font_size,
-            ),
-            spacer,
-            widget.CurrentLayoutIcon(
-                custom_icon_paths=const.ICONS_PATH,
-                foreground=black_double,
-                background=theme.third,
-                padding=0,
-                scale=0.6,
-            ),
-            widget.Sep(
-                linewidth=0,
-                padding=5,
-                foreground=black_double,
-                background=theme.third,
             ),
             widget.CurrentLayout(
                 foreground=white_double,

@@ -3,7 +3,7 @@ import os
 import random
 import subprocess
 from libqtile.lazy import lazy
-from utils.constants import HOME, SHUTTER_COMMAND, SCREENSHOT_PATH
+from juancamr.utils.constants import HOME, SHUTTER_COMMAND, SCREENSHOT_PATH
 
 
 def run_command_with_terminal(command: str):

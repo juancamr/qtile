@@ -2,8 +2,8 @@
 
 from libqtile import layout
 from libqtile.config import Group, Match
-from settings import keymap
-from utils.theme import theme
+from juancamr import keymaps
+from juancamr.utils.theme import theme
 
 WITH_MARGIN = True
 MARGIN = 0
@@ -16,8 +16,8 @@ def init_groups() -> list:
     anki_match = Match(wm_class="anki")
 
     groups = []
-    group_names = keymap.workspaces_keybindings
-    group_labels = [ "h", "t", "n", "s", "c", "r" ]
+    group_names = keymaps.workspaces_keybindings
+    group_labels = keymaps.workspaces_keybindings
     group_layouts = ["bsp" for _ in range(6)]
     group_matches = [[firefox_match], [obsidian_match], [anki_match], [], [], []]
 

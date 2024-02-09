@@ -1,6 +1,6 @@
 import os
-from utils.theme import theme
-from utils.colors import only
+from juancamr.utils.theme import theme
+from juancamr.utils.colors import only
 
 TERMINAL = "alacritty"
 BROWSER = "firefox"
@@ -21,7 +21,7 @@ LOGOUT_COMMAND = "archlinux-logout"
 SCREENSHOT_PATH = "/tmp/temp_capture.png"
 SHUTTER_COMMAND = f"shutter -s -e -o {SCREENSHOT_PATH} && xclip -selection clipboard -target image/png -i {SCREENSHOT_PATH}"
 
-SCRIPT_PATH = "/.config/qtile/assets/scripts"
+SCRIPT_PATH = "/.config/qtile/juancamr/scripts"
 PYHASHER = f"python {HOME}/pyhasher/main.py &"
 OPEN_SETTINGS = f"cd {HOME}/.config/qtile; nvim ."
 AUTOSTART_SCRIPT = f"{SCRIPT_PATH}/autostart.sh"

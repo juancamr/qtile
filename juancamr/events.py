@@ -1,13 +1,11 @@
 import subprocess
 from libqtile import hook
-from libqtile.log_utils import logger
-from utils import utils, constants as const
+from juancamr.utils import utils, constants as const
 
 
 @hook.subscribe.client_new
 def new_client(window):
     utils.toggle_borders(window.qtile.current_group, True)
-    logger.warning(f"New client: {window.window.get_wm_class()}")
 
 
 @hook.subscribe.client_killed

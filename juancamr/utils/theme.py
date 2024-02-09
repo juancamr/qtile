@@ -1,4 +1,4 @@
-from utils.colors import double, Colors
+from juancamr.utils.colors import double, Colors
 
 
 class Theme:
@@ -79,7 +79,7 @@ minimal = Theme(
     group_inactive=double(colors.ZINC_600),
     window_name=double(colors.ZINC_050),
     panel_background=double(colors.ZINC_900),
-    border_active=double(colors.BLUE_800),
+    border_active=double(colors.SKY_900),
     border_inactive=double(colors.GRAY_950),
 )
 

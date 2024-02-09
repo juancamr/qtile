@@ -17,11 +17,12 @@ blueberry-tray &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 firefox &
-# obsidian &
 # anki-woodrow.anki &
+# obsidian &
+# todoist &
 
 picom --experimental-backends &
 run volumeicon &
-sh ~/.config/qtile/assets/scripts/keyboard.sh &
+sh ~/.config/qtile/juancamr/scripts/keyboard/keyboard.sh
 parcellite --no-icon &
-nitrogen --restore
+nitrogen --restore &

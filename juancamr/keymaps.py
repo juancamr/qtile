@@ -2,8 +2,8 @@
 import os
 from libqtile.config import Key
 from libqtile.command import lazy
-from utils import utils, constants as const
-from utils.constants import MOD, SHIFT, CONTROL
+from juancamr.utils import utils, constants as const
+from juancamr.utils.constants import MOD, SHIFT, CONTROL
 
 workspaces_keybindings = ["h", "t", "n", "s", "c", "r"]
 workspaces = enumerate(workspaces_keybindings)
@@ -134,7 +134,8 @@ def add_workespaces_keys(groups, keys) -> list:
                     utils.toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
                     lazy.function(
-                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile,
+                        group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),
@@ -146,7 +147,8 @@ def add_workespaces_keys(groups, keys) -> list:
                     lazy.window.togroup(i.name),
                     lazy.group[i.name].toscreen(),
                     lazy.function(
-                        lambda qtile, group_name=i.name: utils.toggle_borders_after_change_group(
+                        lambda qtile,
+                        group_name=i.name: utils.toggle_borders_after_change_group(
                             qtile, group_name, groups_dict
                         )
                     ),
