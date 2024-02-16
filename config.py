@@ -1,16 +1,21 @@
 from libqtile.layout import MonadTall, MonadWide, Matrix, Bsp, Floating, RatioTile, Max
-from libqtile.config import Screen
-from libqtile import bar
-from libqtile import qtile, widget
-from libqtile.config import Group, Match
-from libqtile.config import Key
-from libqtile import hook
-from libqtile.config import Drag
+from libqtile.config import Group, Match, Key, Drag, Screen
+from libqtile import qtile, widget, bar, hook
 from libqtile.command import lazy
 import subprocess
 import os
 
 # Constants -----------------------------------------------------------------
+
+TERMINAL = "alacritty"
+BROWSER = "firefox"
+HOME = os.path.expanduser("~")
+UBUNTU_FONT = "Ubuntu"
+MOD = "mod4"
+ALT = "mod1"
+SHIFT = "shift"
+CONTROL = "control"
+PYHASHER = f"python {HOME}/.config/qtile/pyhasher.py &"
 
 ZINC_900 = "18181b"
 theme = {
@@ -26,57 +31,17 @@ theme = {
     "border_inactive": ["#030712", "#030712"],
 }
 
-TERMINAL = "alacritty"
-BROWSER = "firefox"
-OBSIDIAN = "obsidian"
-THUNAR = "thunar"
-CODE = "code"
-HOME = os.path.expanduser("~")
-# DMENU = f"dmenu_run -i -nb '{theme["panel_background"][1]}' -nf '{theme["window_name"][1]}' -sb '{theme["window_name"][1]}' -sf '{theme["panel_background"][1]}' -fn 'ProductSans:bold:pixelsize=14'"
-DMENU = "dmenu_run"
-ICONS_PATH = [f"{HOME}/.config/qtile/assets/icons"]
-ICON_TOPBAR = "~/.config/qtile/assets/icons/arch_indigo.png"
-FONT_AWESOME = "FontAwesome"
-UBUNTU_FONT = "Ubuntu"
-UBUNTU_BOLD_FONT = "Ubuntu Bold"
-PRODUCT_SANS_FONT = "Product Sans"
-PRODUCT_SANS_BOLD_FONT = "Product Sans Bold"
-PAVUCONTROL = "pavucontrol"
-LOGOUT_COMMAND = "archlinux-logout"
-SCREENSHOT_PATH = "/tmp/temp_capture.png"
-SHUTTER_COMMAND = f"shutter -s -e -o {SCREENSHOT_PATH} && xclip -selection clipboard -target image/png -i {SCREENSHOT_PATH}"
-
-PYHASHER = f"python {HOME}/pyhasher/main.py &"
-OPEN_SETTINGS = f"cd {HOME}/.config/qtile; nvim ."
-AUTOSTART_SCRIPT = "/.config/qtile/autostart.sh"
-CHANGE_OUTPUT = "/.config/qtile/audio.sh"
-
-# icons
-CORNER_ICON = ""
-VOLUME_ICON = " "
-MEMORY_ICON = ""
-
-# super keys
-MOD = "mod4"
-ALT = "mod1"
-SHIFT = "shift"
-CONTROL = "control"
-
-WITH_MARGIN = True
-MARGIN = 0
-
 # Settings -----------------------------------------------------------------
 
-mod = "mod4"
 mouse = [
     Drag(
-        [mod],
+        [MOD],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [mod],
+        [MOD],
         "Button3",
         lazy.window.set_size_floating(),
         start=lazy.window.get_size(),
@@ -91,7 +56,6 @@ bring_front_click = False
 cursor_warp = False
 floating_layout = Floating(
     float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
         *Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
@@ -126,7 +90,34 @@ auto_fullscreen = True
 focus_on_window_activation = "focus"  # or smart
 wmname = "LG3D"
 
+# Functions -----------------------------------------------------------------
+
+
+@lazy.function
+def capture_and_copy(_):
+    screenshot_path = "/tmp/temp_capture.png"
+    shutter_command = f"shutter -s -e -o {screenshot_path} && xclip -selection clipboard -target image/png -i {screenshot_path}"
+    subprocess.run(shutter_command, shell=True, check=True)
+    os.remove(screenshot_path)
+
+
+@lazy.function
+def volume_up(qtile):
+    qtile.cmd_spawn("amixer -D pulse sset Master 5%+")
+
+
+@lazy.function
+def volume_down(qtile):
+    qtile.cmd_spawn("amixer -D pulse sset Master 5%-")
+
+
+def double(color: str) -> list:
+    return [color, color]
+
+
 # Keybindings ---------------------------------------------------------------
+
+workspaces_keybindings = ["h", "t", "n", "s", "c", "r"]
 
 # navigate keys
 keys = [
@@ -218,30 +209,23 @@ keys = [
     Key([MOD, SHIFT], "space", lazy.window.toggle_floating()),
 ]
 
-# groups keymaps
-workspaces_keybindings = ["h", "t", "n", "s", "c", "r"]
-
 
 def init_groups() -> list:
-    """initialize groups"""
     firefox_match = Match(wm_class="firefox")
     obsidian_match = Match(wm_class="obsidian")
     anki_match = Match(wm_class="anki")
 
     groups = []
     group_names = workspaces_keybindings
-    group_labels = workspaces_keybindings
     group_layouts = ["bsp" for _ in range(6)]
     group_matches = [[firefox_match], [obsidian_match], [anki_match], [], [], []]
 
-    for name, layout_c, label, matches in zip(
-        group_names, group_layouts, group_labels, group_matches
-    ):
+    for name, layout_c, matches in zip(group_names, group_layouts, group_matches):
         groups.append(
             Group(
                 name=name,
                 layout=layout_c.lower(),
-                label=label,
+                label=name,
                 matches=matches,
             )
         )
@@ -249,33 +233,7 @@ def init_groups() -> list:
     return groups
 
 
-groups = init_groups()
-
-
-@lazy.function
-def toggle_borders_before_change_group(qtile):
-    """verifica si en el actual group queda unicaemnte una ventana"""
-    toggle_borders(qtile.current_group, False, is_for_migrate=True)
-
-
-def toggle_borders_after_change_group(qtile, group_name, groups_dict: dict):
-    """despues de cambiar entre grupos verifica el estado
-    de esta contando la cantidad de ventanas actuales"""
-    index_group = groups_dict[group_name]
-    group = qtile.groups[index_group]
-    if len(group.windows) == 1:
-        toggle_borders(group, False)
-    else:
-        toggle_borders(group, True)
-
-
-workspaces = enumerate(workspaces_keybindings)
-
-
-groups_dict = {keybind: index for (index, keybind) in workspaces}
-
-
-def add_workespaces_keys(groups, keys) -> list:
+def add_workspaces_keys(groups, keys) -> list:
     keys = []
     for i in groups:
         keys.extend(
@@ -284,71 +242,34 @@ def add_workespaces_keys(groups, keys) -> list:
                 Key(
                     [MOD, CONTROL],
                     i.name,
-                    toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
-                    lazy.function(
-                        lambda qtile,
-                        group_name=i.name: toggle_borders_after_change_group(
-                            qtile, group_name, groups_dict
-                        )
-                    ),
                 ),
                 Key(
                     [MOD, SHIFT],
                     i.name,
-                    toggle_borders_before_change_group,
                     lazy.window.togroup(i.name),
                     lazy.group[i.name].toscreen(),
-                    lazy.function(
-                        lambda qtile,
-                        group_name=i.name: toggle_borders_after_change_group(
-                            qtile, group_name, groups_dict
-                        )
-                    ),
                 ),
             ]
         )
     return keys
 
 
-SCREENSHOT_PATH = "/tmp/temp_capture.png"
-SHUTTER_COMMAND = f"shutter -s -e -o {SCREENSHOT_PATH} && xclip -selection clipboard -target image/png -i {SCREENSHOT_PATH}"
-
-
-@lazy.function
-def capture_and_copy(_):
-    """funcion que realiza una seleccion para capturar
-    la pantalla para posteriormente copiarla al portapapeles"""
-    capture_command = SHUTTER_COMMAND
-    subprocess.run(capture_command, shell=True, check=True)
-    os.remove(SCREENSHOT_PATH)
-
-
-@lazy.function
-def volume_up(qtile):
-    qtile.cmd_spawn("amixer -D pulse sset Master 5%+")
-
-
-@lazy.function
-def volume_down(qtile):
-    qtile.cmd_spawn("amixer -D pulse sset Master 5%-")
-
-
-keys.extend(add_workespaces_keys(groups, keys))
-
+groups = init_groups()
+workspaces = enumerate(workspaces_keybindings)
+groups_dict = {keybind: index for (index, keybind) in workspaces}
+keys.extend(add_workspaces_keys(groups, keys))
 # custom keymaps
 keys.extend(
     [
         Key([MOD], "Return", lazy.spawn(TERMINAL)),
-        Key([MOD, SHIFT], "Return", lazy.spawn(THUNAR)),
-        Key([MOD], "x", lazy.spawn(LOGOUT_COMMAND)),
-        Key([MOD], "d", lazy.spawn(DMENU)),
-        Key([MOD], "b", lazy.spawn(BROWSER)),
+        Key([MOD], "x", lazy.spawn("archlinut-logout")),
+        Key([MOD], "d", lazy.spawn("dmenu_run")),
+        Key([MOD], "b", lazy.spawn("browser")),
         Key([MOD], "a", lazy.function(lambda _: os.system(PYHASHER))),
-        Key([MOD], "o", lazy.spawn(OBSIDIAN)),
         Key([MOD], "m", lazy.window.toggle_floating()),
         Key([MOD], "p", capture_and_copy),
-        Key([MOD], "e", lazy.spawn(THUNAR)),
+        Key([MOD], "e", lazy.spawn("thunar")),
         Key([MOD], "v", volume_up),
         Key([MOD, SHIFT], "v", volume_down),
     ]
@@ -357,13 +278,8 @@ keys.extend(
 
 # Layouts ---------------------------------------------------------------------
 
-
-def double(color: str) -> list:
-    return [color, color]
-
-
 layout_theme = {
-    "margin": MARGIN if WITH_MARGIN else 0,
+    "margin": 0,
     "border_width": 1,
     "border_focus": theme["border_active"],
     "border_normal": theme["border_inactive"],
@@ -379,10 +295,10 @@ layouts = [
 ]
 
 
+# topbar
 def init_widgets():
-    """get the widgets"""
     widget_defaults = dict(
-        font=PRODUCT_SANS_FONT,
+        font=UBUNTU_FONT,
         fontsize=12,
         padding=2,
         background=theme["panel_background"],
@@ -395,7 +311,7 @@ def init_widgets():
     def init_widgets_list():
         return [
             widget.GroupBox(
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
                 fontsize=font_size,
                 margin_y=2,
                 margin_x=0,
@@ -422,16 +338,18 @@ def init_widgets():
             ),
             widget.WindowName(
                 foreground=theme["window_name"],
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
                 background=theme["panel_background"],
                 fontsize=font_size,
                 padding=0,
             ),
-            widget.Systray(),
+            widget.Systray(
+                background=theme["panel_background"],
+            ),
             spacer,
             widget.TextBox(
-                text=MEMORY_ICON,
-                font=FONT_AWESOME,
+                text="RAM:",
+                font=UBUNTU_FONT,
                 foreground=white_double,
                 background=theme["first"],
                 padding=0,
@@ -440,7 +358,7 @@ def init_widgets():
             widget.Memory(
                 foreground=white_double,
                 background=theme["first"],
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
                 mouse_callbacks={
                     "Button1": lambda: qtile.cmd_spawn(TERMINAL + " -e htop")
                 },
@@ -449,18 +367,20 @@ def init_widgets():
             ),
             spacer,
             widget.TextBox(
-                text=VOLUME_ICON,
-                fontsize=16,
-                font=FONT_AWESOME,
+                text="VOL:",
+                fontsize=12,
+                font=UBUNTU_FONT,
                 foreground=white_double,
                 background=theme["second"],
                 padding=0,
                 mouse_callbacks={
-                    "Button1": lambda: qtile.cmd_spawn(f"{HOME}{CHANGE_OUTPUT}")
+                    "Button1": lambda: qtile.cmd_spawn(
+                        f"{HOME}{ '/.config/qtile/audio.sh'}"
+                    )
                 },
             ),
             widget.Volume(
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
                 foreground=white_double,
                 background=theme["second"],
                 padding=5,
@@ -471,13 +391,12 @@ def init_widgets():
                 fontsize=font_size,
                 background=theme["third"],
                 padding=5,
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
             ),
-            spacer,
             widget.Clock(
                 foreground=white_double,
                 background=theme["fourth"],
-                font=PRODUCT_SANS_FONT,
+                font=UBUNTU_FONT,
                 fontsize=font_size,
                 format="%B %d - %H:%M",
             ),
@@ -492,41 +411,17 @@ def init_widgets():
 # Screens ---------------------------------------------------------------------
 
 widgets_list = init_widgets()[1]
-
-
-def init_screens():
-    return [
-        Screen(bottom=bar.Bar(widgets=widgets_list, size=20, opacity=1)),
-        Screen(bottom=bar.Bar(widgets=widgets_list, size=20, opacity=1)),
-    ]
-
-
-screens = init_screens()
-follow_mouse_focus = False
-
+screens = [
+    Screen(bottom=bar.Bar(widgets=widgets_list, size=20, opacity=1)),
+]
 
 # Events ---------------------------------------------------------------------
 
 
-def toggle_borders(group, is_for_open: bool, is_for_migrate=False):
-    len_windows = len(group.windows)
-    count_windows = 0 if is_for_open else 2 if is_for_migrate else 1
-    group.use_layout(3 if len_windows == count_windows else 0)
-
-
-@hook.subscribe.client_new
-def new_client(window):
-    toggle_borders(window.qtile.current_group, True)
-
-
-@hook.subscribe.client_killed
-def kill_client(window):
-    toggle_borders(window.qtile.current_group, False)
-
-
 @hook.subscribe.startup_once
 def start_once():
-    subprocess.call([HOME + AUTOSTART_SCRIPT])
+    autostart_script = "/.config/qtile/autostart.sh"
+    subprocess.call([HOME + autostart_script])
 
 
 @hook.subscribe.client_new
